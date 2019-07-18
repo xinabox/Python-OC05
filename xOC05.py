@@ -1,4 +1,4 @@
-from microbit import i2c, sleep
+from xCore import xCore
 import math
 
 PCA9685_I2C_ADDR = 0x78
@@ -25,6 +25,7 @@ class OC05:
     
     def __init__(self, addr=PCA9685_I2C_ADDR):
         self.addr = addr
+        self.i2c = xCore()
 
     def init(self, outFreq=60): 
         if outFreq > 1000:
@@ -35,15 +36,15 @@ class OC05:
             self.frequency = outFreq
         prescaler = self.calcFreqPrescaler(self.frequency)
         try:
-            i2c.write(self.addr, bytearray([PCA9685_MODE_1, PCA9685_SLEEP]))
-            i2c.write(self.addr, bytearray([PCA9685_PRESCALE, prescaler]))
-            i2c.write(self.addr, bytearray([PCA9685_LED8_ON_L, 0x00]))
-            i2c.write(self.addr, bytearray([PCA9685_LED8_ON_H, 0x00]))
-            i2c.write(self.addr, bytearray([PCA9685_LED8_OFF_L, 0x00]))
-            i2c.write(self.addr, bytearray([PCA9685_LED8_OFF_H, 0x00]))
-            i2c.write(self.addr, bytearray([PCA9685_MODE_1, PCA9685_WAKE]))
+            self.i2c.write(self.addr, bytearray([PCA9685_MODE_1, PCA9685_SLEEP]))
+            self.i2c.write(self.addr, bytearray([PCA9685_PRESCALE, prescaler]))
+            self.i2c.write(self.addr, bytearray([PCA9685_LED8_ON_L, 0x00]))
+            self.i2c.write(self.addr, bytearray([PCA9685_LED8_ON_H, 0x00]))
+            self.i2c.write(self.addr, bytearray([PCA9685_LED8_OFF_L, 0x00]))
+            self.i2c.write(self.addr, bytearray([PCA9685_LED8_OFF_H, 0x00]))
+            self.i2c.write(self.addr, bytearray([PCA9685_MODE_1, PCA9685_WAKE]))
             sleep(1000)
-            i2c.write(self.addr, bytearray([PCA9685_MODE_1, PCA9685_RESTART]))
+            self.i2c.write(self.addr, bytearray([PCA9685_MODE_1, PCA9685_RESTART]))
         except Exception as e:
             print(e)
             raise e
@@ -62,16 +63,16 @@ class OC05:
         offStep = max(0, min(4095, offStep))
         try:
             # Low byte of onStep
-            i2c.write(self.addr, bytearray([pinOffset + PCA9685_LED8_ON_L, onStep & 0xFF]))
+            self.i2c.write(self.addr, bytearray([pinOffset + PCA9685_LED8_ON_L, onStep & 0xFF]))
 
             # High byte of onStep
-            i2c.write(self.addr, bytearray([pinOffset + PCA9685_LED8_ON_H, (onStep >> 8)]))
+            self.i2c.write(self.addr, bytearray([pinOffset + PCA9685_LED8_ON_H, (onStep >> 8)]))
 
             # Low byte of offStep
-            i2c.write(self.addr, bytearray([pinOffset + PCA9685_LED8_OFF_L, offStep & 0xFF]))
+            self.i2c.write(self.addr, bytearray([pinOffset + PCA9685_LED8_OFF_L, offStep & 0xFF]))
 
             # High byte of offStep
-            i2c.write(self.addr, bytearray([pinOffset + PCA9685_LED8_OFF_H, (offStep >> 8)]))
+            self.i2c.write(self.addr, bytearray([pinOffset + PCA9685_LED8_OFF_H, (offStep >> 8)]))
         except Exception as e:
             print(e)
             raise e
