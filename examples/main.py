@@ -1,8 +1,8 @@
-from microbit import *
-from OC05 import OC05
+from xOC05 import xOC05
+from xCore import xCore
 
 # OC05 instance
-OC05 = OC05()
+OC05 = xOC05()
 
 # configure OC05 with frequency of 60Hz
 OC05.init(60)
