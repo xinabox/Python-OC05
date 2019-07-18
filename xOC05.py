@@ -20,7 +20,7 @@ PCA9685_LED8_ON_H = 0x27
 PCA9685_LED8_OFF_L = 0x28
 PCA9685_LED8_OFF_H = 0x29
 
-class OC05:
+class xOC05:
     frequency = 0
     
     def __init__(self, addr=PCA9685_I2C_ADDR):
