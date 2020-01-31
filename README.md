@@ -1,8 +1,7 @@
 [![GitHub Issues](https://img.shields.io/github/issues/xinabox/py-OC05.svg)](https://github.com/xinabox/py-OC05/issues) 
 ![GitHub Commit](https://img.shields.io/github/last-commit/xinabox/py-OC05) 
 ![Maintained](https://img.shields.io/maintenance/yes/2020) 
-![Build status badge](https://github.com/xinabox/py-OC05/workflows/maker/badge.svg)
-![Build status badge](https://github.com/xinabox/py-OC05/workflows/microbit/badge.svg)
+![Build status badge](https://github.com/xinabox/py-OC05/workflows/python/badge.svg)
 ![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)
 # py-OC05
 Python module for [OC05](https://xinabox.cc/products/oc05)
