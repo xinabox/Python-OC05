@@ -1,1 +1,1 @@
-git+git://github.com/xinabox/xCore
+git+git://github.com/xinabox/rpi-CORE
