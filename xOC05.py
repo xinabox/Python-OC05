@@ -43,7 +43,7 @@ class xOC05:
             self.i2c.write(self.addr, bytearray([PCA9685_LED8_OFF_L, 0x00]))
             self.i2c.write(self.addr, bytearray([PCA9685_LED8_OFF_H, 0x00]))
             self.i2c.write(self.addr, bytearray([PCA9685_MODE_1, PCA9685_WAKE]))
-            sleep(1000)
+            self.i2c.sleep(1000)
             self.i2c.write(self.addr, bytearray([PCA9685_MODE_1, PCA9685_RESTART]))
         except Exception as e:
             print(e)
