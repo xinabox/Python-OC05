@@ -8,11 +8,7 @@ OC05 = xOC05()
 OC05.init(60)
 
 while True:
-    #if button_b.is_pressed():
-        OC05.setServoPosition(1, 0)     #  position servo to the right 
-        xCore.sleep(50)
-        #display.scroll("RIGHT")
-    #elif button_a.is_pressed():
-        OC05.setServoPosition(1, 180)   #  position servo to the left
-        #display.scroll("LEFT")
-        xCore.sleep(50)
+    OC05.setServoPosition(1, 0)     #  position servo to the right 
+    xCore.sleep(50)
+    OC05.setServoPosition(1, 180)   #  position servo to the left
+    xCore.sleep(50)
