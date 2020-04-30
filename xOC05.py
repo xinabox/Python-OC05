@@ -75,7 +75,6 @@ class xOC05:
             self.i2c.write(self.addr, bytearray([pinOffset + PCA9685_LED8_OFF_H, (offStep >> 8)]))
         except Exception as e:
             print(e)
-            raise e
             
     def setCRServoPosition(self, channelNum, speed):
         isReverse = False
