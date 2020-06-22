@@ -22,12 +22,12 @@ PCA9685_LED8_OFF_H = 0x29
 
 class xOC05:
     frequency = 0
-    
+
     def __init__(self, addr=PCA9685_I2C_ADDR):
         self.addr = addr
         self.i2c = xCore()
 
-    def init(self, outFreq=60): 
+    def init(self, outFreq=60):
         if outFreq > 1000:
             self.frequency = 1000
         elif outFreq < 40:
@@ -36,18 +36,17 @@ class xOC05:
             self.frequency = outFreq
         prescaler = self.calcFreqPrescaler(self.frequency)
         try:
-            self.i2c.write(self.addr, bytearray([PCA9685_MODE_1, PCA9685_SLEEP]))
-            self.i2c.write(self.addr, bytearray([PCA9685_PRESCALE, prescaler]))
-            self.i2c.write(self.addr, bytearray([PCA9685_LED8_ON_L, 0x00]))
-            self.i2c.write(self.addr, bytearray([PCA9685_LED8_ON_H, 0x00]))
-            self.i2c.write(self.addr, bytearray([PCA9685_LED8_OFF_L, 0x00]))
-            self.i2c.write(self.addr, bytearray([PCA9685_LED8_OFF_H, 0x00]))
-            self.i2c.write(self.addr, bytearray([PCA9685_MODE_1, PCA9685_WAKE]))
+            self.i2c.write_bytes(self.addr, PCA9685_MODE_1, PCA9685_SLEEP)
+            self.i2c.write_bytes(self.addr, PCA9685_PRESCALE, prescaler)
+            self.i2c.write_bytes(self.addr, PCA9685_LED8_ON_L, 0x00)
+            self.i2c.write_bytes(self.addr, PCA9685_LED8_ON_H, 0x00)
+            self.i2c.write_bytes(self.addr, PCA9685_LED8_OFF_L, 0x00)
+            self.i2c.write_bytes(self.addr, PCA9685_LED8_OFF_H, 0x00)
+            self.i2c.write_bytes(self.addr, PCA9685_MODE_1, PCA9685_WAKE)
             self.i2c.sleep(1000)
-            self.i2c.write(self.addr, bytearray([PCA9685_MODE_1, PCA9685_RESTART]))
+            self.i2c.write_bytes(self.addr, PCA9685_MODE_1, PCA9685_RESTART)
         except Exception as e:
             print(e)
-            raise e
 
     def setServoPosition(self, channelNum, degrees):
         channelNum = max(1, min(8, channelNum))
@@ -63,19 +62,19 @@ class xOC05:
         offStep = max(0, min(4095, offStep))
         try:
             # Low byte of onStep
-            self.i2c.write(self.addr, bytearray([pinOffset + PCA9685_LED8_ON_L, onStep & 0xFF]))
+            self.i2c.write_bytes(self.addr, pinOffset + PCA9685_LED8_ON_L, onStep & 0xFF)
 
             # High byte of onStep
-            self.i2c.write(self.addr, bytearray([pinOffset + PCA9685_LED8_ON_H, (onStep >> 8)]))
+            self.i2c.write_bytes(self.addr, pinOffset + PCA9685_LED8_ON_H, (onStep >> 8))
 
             # Low byte of offStep
-            self.i2c.write(self.addr, bytearray([pinOffset + PCA9685_LED8_OFF_L, offStep & 0xFF]))
+            self.i2c.write_bytes(self.addr, pinOffset + PCA9685_LED8_OFF_L, offStep & 0xFF)
 
             # High byte of offStep
-            self.i2c.write(self.addr, bytearray([pinOffset + PCA9685_LED8_OFF_H, (offStep >> 8)]))
+            self.i2c.write_bytes(self.addr, pinOffset + PCA9685_LED8_OFF_H, (offStep >> 8))
         except Exception as e:
             print(e)
-            
+
     def setCRServoPosition(self, channelNum, speed):
         isReverse = False
         pwm = 0
@@ -85,7 +84,7 @@ class xOC05:
         offsetEnd = self.calcFreqOffset(self.freqency, 25)
         if speed == 0:
             return self.setPinPulseRange(channelnum, 0, offsetMid)
-        
+
         if speed < 0:
             isReverse = True
         if isReverse:
@@ -95,7 +94,7 @@ class xOC05:
 
         speed = math.abs(speed)
         calcOffset = ((speed * spread) / 100)
-        
+
         if isReverse:
             pwm = offsetMid - calcOffset
         else:
