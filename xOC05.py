@@ -21,11 +21,10 @@ PCA9685_LED8_OFF_L = 0x28
 PCA9685_LED8_OFF_H = 0x29
 
 class xOC05:
-    frequency = 0
-
     def __init__(self, addr=PCA9685_I2C_ADDR):
         self.addr = addr
         self.i2c = xCore()
+        self.frequency = 0
 
     def init(self, outFreq=60):
         if outFreq > 1000:
@@ -79,9 +78,9 @@ class xOC05:
         isReverse = False
         pwm = 0
         channelnum = max(1, min(8, channelNum))
-        offsetStart = self.calcFreqOffset(self.freqency, 5)
-        offsetMid = self.calcFreqOffset(self.freqency, 15)
-        offsetEnd = self.calcFreqOffset(self.freqency, 25)
+        offsetStart = self.calcFreqOffset(self.frequency, 5)
+        offsetMid = self.calcFreqOffset(self.frequency, 15)
+        offsetEnd = self.calcFreqOffset(self.frequency, 25)
         if speed == 0:
             return self.setPinPulseRange(channelnum, 0, offsetMid)
 
