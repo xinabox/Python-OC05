@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="xinabox-OC05",
-    version="0.0.2",
+    version="0.0.3",
     author="Luqmaan Baboo",
     author_email="luqmaanbaboo@gmail.com",
     description="Servo Driver",
