@@ -5,7 +5,7 @@
 ![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)
 # Python-OC05
 
-The OC05 xChip is an 8-channel servo motor driver. It is based on the popular PCA9685 manufactured by NXP Semiconductor. It is supported by a BU33SD5 regulator to drive and accurately control up to 8 servo motors on a single module and act as system power supply. The module has 8 standard 2.54 mm (0.1”) servo headers, plus 1 standard 2.54 mm (0.1”) battery/BEC input header.
+The OC05 xChip is an 8-channel servo motor driver. It is based on the popular PCA9685 manufactured by NXP Semiconductor. It is supported by a BU33SD5 regulator to drive and accurately control up to 8 servo motors on a single module and act as system power supply. The module has 8 standard 2.54 mm (0.1") servo headers, plus 1 standard 2.54 mm (0.1") battery/BEC input header.
 
 # Usage
 
