@@ -4,10 +4,10 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="xinabox-OC05",
-    version="0.0.4",
+    version="0.0.5",
     author="Luqmaan Baboo",
     author_email="luqmaanbaboo@gmail.com",
-    description="Servo Driver",
+    description="Solid state relay",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/xinabox/Python-OC05",
